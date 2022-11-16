@@ -1,0 +1,8 @@
+-- task_done_character = X      -- character to indicate a task as completed
+-- org_root = '~/.local/share/org'    -- base directory of org files
+-- index_filename = 'index'           -- name of index files in each directory
+-- file_extension = 'md'              -- extension of files
+-- inbox_default_status = ''            -- assign a default status to tasks when adding to inbox
+-- inbox_default_when = ''            -- assign a default status to tasks when adding to inbox
+-- inbox_default_deadline = ''            -- assign a default status to tasks when adding to inbox
+-- inbox_default_tags = ''            -- assign a default status to tasks when adding to inbox

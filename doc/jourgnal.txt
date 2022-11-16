@@ -1,0 +1,21 @@
+*jourgnal.txt*         For Nvim version 0.7+
+
+jourgnal is a markdown based todo list and journal manager for vim
+
+                                      Type |gO| to see the table of contents.
+
+==============================================================================
+INTRODUCTION                                                         *jourgnal*
+
+jourgnal is a neovim plugin written in lua that provides todo list management and journaling within vim. It is ispired mostly by vimwiki and orgmode and tries to bring both of them together.
+
+jourgnal can be used for
+
+- organisation of todo lists
+- personal project management
+- journaling
+- note taking
+
+and much more.
+
+Jourgnal is highly customizable through the use of markdown wiki pages as "dashboards", so you can fit your task organization to your specific needs. This way you can develop superhuman self management powers by emplaoying vim for your task management. At the same time, it forces you to think for your self about how you want to organize. So if you are looking for a no-brainer with given structure, you are in the worng place.
