@@ -10,8 +10,7 @@ local c = {                 -- default config, will be overriden by user config
   default_status = '',                    -- default status to be assigned when adding items to the inbox
   default_deadline = '',                  -- default deadline to be used when adding items to the inbox
   default_when = '',                      -- default when to be used when adding items to the inbox
-
-  -- task_done_character = X      -- character to indicate a task as completed
+  task_tick_char = 'x'                -- character to indicate a task as completed
 }
 
 ------------------------------------------------------- local functions
@@ -49,5 +48,6 @@ M.default_status = function() return c.default_status end
 M.default_when = function() return c.default_when end
 M.default_deadline = function() return c.default_deadline end
 M.default_tags = function() return c.default_tags end
+M.task_tick_char = function() return c.task_tick_char end
 
 return M
