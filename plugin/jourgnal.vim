@@ -20,6 +20,6 @@ exe "lua package.path = package.path .. ';" . s:lua_rocks_deps_loc . "/lua-?/ini
 " Exposes the plugin's functions for use as commands in Neovim.
 command! -nargs=0 AddToInbox lua require('jourgnal').add_task_to_inbox()
 command! -nargs=0 AddTaskHere lua require('jourgnal').add_task_here()
-
 command! -nargs=0 ToggleTask lua require('jourgnal').toggle_task()
+command! -nargs=0 SetDate lua require('jourgnal').set_date()
 
