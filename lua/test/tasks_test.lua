@@ -112,6 +112,23 @@ M.test_title_pattern = function()
   end
 end
 
+-- Level
+local test_level = function(line, expected)
+  -- GIVEN
+  -- WHEN
+  local actual = tasks.task_level(line)
+  -- THEN
+  t.assert_equals(expected, actual)
+end
+
+M.test_level = function()
+  print('----------------- Test Level -----------------')
+  for _, test_case in pairs(test_data) do
+    print('-------- Test Case ', test_case['line'])
+    test_level(test_case['line'], test_case['level'])
+  end
+end
+
 M.test_toggle_task_ticked_tick = function()
   print('----------------- Test Task Tick -----------------')
   -- GIVEN
@@ -253,6 +270,7 @@ M.test_ticked_pattern()
 M.test_date_pattern()
 M.test_deadline_pattern()
 M.test_title_pattern()
+M.test_level()
 M.test_toggle_task_ticked_tick()
 M.test_toggle_task_ticked_untick()
 M.test_create_task()

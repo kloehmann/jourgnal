@@ -13,6 +13,7 @@ local date_pattern = '^%s*-.*%s(<.+>).*$'
 local deadline_pattern = '^%s*-%s%[.%]%s+.+%s(%[.+%]).*$'
 local tags_pattern = '^%s*-.*%s(:.+:)$'
 local status_pattern = '^%s*- %[.%] (%u+%s).*$'
+local level_pattern = '^(%s*)- %[.%] .*$'
 
 local task_ticked = function(line) -- will return nil if line is not a task
   local ticked = string.match(line, tick_pattern)
@@ -54,12 +55,22 @@ local task_title = function(line)
   return title
 end
 
+local task_level = function(line)
+  local prespaces = string.match(line, level_pattern)
+  local level = 0
+  if (prespaces ~= nil and prespaces:len() > 1) then
+    level = (prespaces:len() / 2) - (prespaces:len() % 2)
+  end
+  return level
+end
+
 M.task_ticked = function(line) return task_ticked(line) end
 M.task_status = function(line) return task_status(line) end
 M.task_title = function(line) return task_title(line) end
 M.task_date = function(line) return task_date(line) end
 M.task_deadline = function(line) return task_deadline(line) end
 M.task_tags = function(line) return task_tags(line) end
+M.task_level = function(line) return task_level(line) end
 
 -- Task class
 Task = {
@@ -68,7 +79,10 @@ Task = {
   title = '',
   date = '',
   deadline = '',
-  tags = ''
+  tags = '',
+  parent = nil,
+  subtasks = {},
+  level = 0
 }
 
 function Task:new(o, title)
@@ -82,6 +96,9 @@ function Task:new(o, title)
   self.date = conf.default_date():len() > 0 and string.format('<%s>', conf.default_date())
   self.deadline = conf.default_deadline():len() > 0 and string.format('[%s]', conf.default_deadline())
   self.tags = conf.default_tags()
+  self.parent = nil
+  self.subtasks = {}
+  self.level = 0
   return o
 end
 
