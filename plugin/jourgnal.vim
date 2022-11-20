@@ -22,4 +22,7 @@ command! -nargs=0 AddToInbox lua require('jourgnal').add_task_to_inbox()
 command! -nargs=0 AddTaskHere lua require('jourgnal').add_task_here()
 command! -nargs=0 ToggleTask lua require('jourgnal').toggle_task()
 command! -nargs=0 SetDate lua require('jourgnal').set_date()
+command! -nargs=0 SetDeadline lua require('jourgnal').set_deadline()
+command! -nargs=0 SetStatus lua require('jourgnal').set_status()
+command! -nargs=0 SetTags lua require('jourgnal').set_tags()
 

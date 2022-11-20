@@ -28,10 +28,8 @@ end
 -- request input from user with given prompt
 M.request_input = function(prompt)
   local input
-  repeat
-    input = fn.input(prompt .. ': ')
-    print('')
-  until (input ~= '')
+  input = fn.input(prompt .. ': ')
+  print('')
   return input
 end
 

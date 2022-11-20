@@ -119,11 +119,19 @@ function Task:toggle_ticked()
 end
 
 function Task:set_date(date)
-  self.date = string.format('<%s>', date)
+  if (date ~= '') then
+    self.date = string.format('<%s>', date)
+  else
+    self.date = date
+  end
 end
 
 function Task:set_deadline(deadline)
-  self.deadline = string.format('[%s]',deadline)
+  if (deadline ~= '') then
+    self.deadline = string.format('[%s]',deadline)
+  else
+    self.deadline = deadline
+  end
 end
 
 function Task:set_tags(tags)

@@ -7,21 +7,21 @@ local M = { }
 
 M.setup = function(config) conf.init(config) end
 
-M.add_task_to_inbox = function()
-  local title = v.request_input('Task title')
-  local line = tasks.create_task(title)
-  v.append_to_file(conf.inbox_file(), line)
-end
-
 M.toggle_task = function()
   local line = v.current_line()
   line = tasks.toggle_task_ticked(line)
   v.set_line(line)
 end
 
-M.add_task_here = function()
+M.add_task_to_inbox = function()
   local title = v.request_input('Task title')
   local line = tasks.create_task(title)
+  v.append_to_file(conf.inbox_file(), line)
+end
+
+M.add_task_here = function()
+  local title = v.request_input('Task title')
+  local line = tasks.create_task('')
   v.prepend_line(line)
 end
 
@@ -30,7 +30,27 @@ M.set_date = function()
   local date = v.request_input('Date')
   line = tasks.set_date(line, date)
   v.set_line(line)
+end
 
+M.set_deadline = function()
+  local line = v.current_line()
+  local deadline = v.request_input('Deadline')
+  line = tasks.set_deadline(line, deadline)
+  v.set_line(line)
+end
+
+M.set_tags = function()
+  local line = v.current_line()
+  local tags = v.request_input('Tags')
+  line = tasks.set_tags(line, tags)
+  v.set_line(line)
+end
+
+M.set_status = function()
+  local line = v.current_line()
+  local status = v.request_input('Status')
+  line = tasks.set_status(line, status)
+  v.set_line(line)
 end
 
 return M
