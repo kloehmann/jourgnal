@@ -126,9 +126,12 @@ function Task:to_line()
   task_line = task_line .. '- ['
   local tick_char = self.ticked and conf.tick_char() or ' '
   task_line = u.concat_if_not_empty(task_line, tick_char, '')
-  task_line = u.concat_if_not_empty(task_line, ']', '')
-  task_line = u.concat_if_not_empty(task_line, self.status, ' ')
-  task_line = u.concat_if_not_empty(task_line, self.title, ' ')
+  task_line = u.concat_if_not_empty(task_line, '] ', '')
+  task_line = u.concat_if_not_empty(task_line, self.status, '')
+  if (self.status:len() > 0) then
+    task_line = task_line .. ' '
+  end
+  task_line = u.concat_if_not_empty(task_line, self.title, '')
   task_line = u.concat_if_not_empty(task_line, self.date, ' ')
   task_line = u.concat_if_not_empty(task_line, self.deadline, ' ')
   task_line = u.concat_if_not_empty(task_line, self.tags, ' ')
