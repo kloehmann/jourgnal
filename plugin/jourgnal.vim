@@ -18,11 +18,11 @@ let s:lua_rocks_deps_loc =  expand("<sfile>:h:r") . "/../lua/jourgnal/deps"
 exe "lua package.path = package.path .. ';" . s:lua_rocks_deps_loc . "/lua-?/init.lua'"
 
 " Exposes the plugin's functions for use as commands in Neovim.
-command! -nargs=0 AddToInbox lua require('jourgnal').add_task_to_inbox()
-command! -nargs=0 AddTaskHere lua require('jourgnal').add_task_here()
+command! -nargs=* AddToInbox lua require('jourgnal').add_task_to_inbox(<q-args>)
+command! -nargs=* AddTask lua require('jourgnal').add_task(<q-args>)
+command! -nargs=* AddSubtask lua require('jourgnal').add_subtask(<q-args>)
 command! -nargs=0 ToggleTask lua require('jourgnal').toggle_task()
-command! -nargs=0 SetDate lua require('jourgnal').set_date()
-command! -nargs=0 SetDeadline lua require('jourgnal').set_deadline()
-command! -nargs=0 SetStatus lua require('jourgnal').set_status()
-command! -nargs=0 SetTags lua require('jourgnal').set_tags()
-
+command! -nargs=* SetDate lua require('jourgnal').set_date(<q-args>)
+command! -nargs=* SetDeadline lua require('jourgnal').set_deadline(<q-args>)
+command! -nargs=* SetStatus lua require('jourgnal').set_status(<q-args>)
+command! -nargs=* SetTags lua require('jourgnal').set_tags(<q-args>)

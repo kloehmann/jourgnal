@@ -119,7 +119,11 @@ function Task:from_line(o , line)
 end
 
 function Task:to_line()
-  local task_line = '- ['
+  local task_line = ''
+  for _ = 1, self.level, 1 do
+    task_line = task_line .. '  '
+  end
+  task_line = task_line .. '- ['
   local tick_char = self.ticked and conf.tick_char() or ' '
   task_line = u.concat_if_not_empty(task_line, tick_char, '')
   task_line = u.concat_if_not_empty(task_line, ']', '')
@@ -159,6 +163,10 @@ function Task:set_status(status)
   self.status = status
 end
 
+function Task:set_level(level)
+  self.level = level
+end
+
 -------------------------------------------------------------- global functions
 
 M.toggle_task_ticked = function(line)
@@ -169,9 +177,11 @@ M.toggle_task_ticked = function(line)
   return task:to_line()
 end
 
-M.create_task = function(title)
+M.create_task = function(title, level)
   local task = Task:new(nil, title)
   assert(task, "Task could not be created")
+  level = level or 0
+  task:set_level(level)
   return task:to_line()
 end
 

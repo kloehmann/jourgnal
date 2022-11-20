@@ -16,9 +16,9 @@ M.current_line = function()
   return api.nvim_get_current_line()
 end
 
-M.prepend_line = function(line)
-  fn.append(fn.line('.')-1, line)
-  fn.cursor(fn.line('.')-1, fn.col('.'))
+M.append_line = function(line)
+  fn.append(fn.line('.'), line)
+  fn.cursor(fn.line('.')+1, fn.col('.'))
 end
 
 M.set_line = function(line)
