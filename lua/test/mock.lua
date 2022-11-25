@@ -1,7 +1,6 @@
 M = {}
 
-
-function M.init_mock(module)
+M.init_mock = function(module)
   local mock = {}
   package.loaded[module] = mock
   return mock

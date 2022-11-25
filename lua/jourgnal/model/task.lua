@@ -73,7 +73,7 @@ M.task_tags = function(line) return task_tags(line) end
 M.task_level = function(line) return task_level(line) end
 
 -- Task class
-Task = {
+M.Task = {
   ticked = false,
   status = '',
   title = '',
@@ -85,8 +85,8 @@ Task = {
   level = 0
 }
 
-function Task:new(o, title)
-  o = o or {}
+function M.Task:new(title)
+  local o = {}
   setmetatable(o, self)
   self.__index = self
 
@@ -102,9 +102,9 @@ function Task:new(o, title)
   return o
 end
 
-function Task:from_line(o , line)
-  o = o or {}
-  setmetatable(o , self)
+function M.Task:from_line(line)
+  local o = {}
+  setmetatable(o, self)
   self.__index = self
 
   local ticked = task_ticked(line)
@@ -118,7 +118,7 @@ function Task:from_line(o , line)
   return o
 end
 
-function Task:to_line()
+function M.Task:to_line()
   local task_line = ''
   for _ = 1, self.level, 1 do
     task_line = task_line .. '  '
@@ -138,11 +138,11 @@ function Task:to_line()
   return task_line
 end
 
-function Task:toggle_ticked()
+function M.Task:toggle_ticked()
   self.ticked = not self.ticked
 end
 
-function Task:set_date(date)
+function M.Task:set_date(date)
   if (date ~= '') then
     self.date = string.format('<%s>', date)
   else
@@ -150,7 +150,7 @@ function Task:set_date(date)
   end
 end
 
-function Task:set_deadline(deadline)
+function M.Task:set_deadline(deadline)
   if (deadline ~= '') then
     self.deadline = string.format('[%s]',deadline)
   else
@@ -158,64 +158,16 @@ function Task:set_deadline(deadline)
   end
 end
 
-function Task:set_tags(tags)
+function M.Task:set_tags(tags)
   self.tags = tags
 end
 
-function Task:set_status(status)
+function M.Task:set_status(status)
   self.status = status
 end
 
-function Task:set_level(level)
+function M.Task:set_level(level)
   self.level = level
 end
 
--------------------------------------------------------------- global functions
-
-M.toggle_task_ticked = function(line)
-  line = line
-  local task = Task:from_line(nil, line)
-  assert(task, 'Current line is not a task')
-  task:toggle_ticked()
-  return task:to_line()
-end
-
-M.create_task = function(title, level)
-  local task = Task:new(nil, title)
-  assert(task, "Task could not be created")
-  level = level or 0
-  task:set_level(level)
-  return task:to_line()
-end
-
-M.set_date = function(line, date)
-  local task = Task:from_line(nil, line)
-  assert(task, "Current line is not a task")
-  task:set_date(date)
-  return task:to_line()
-end
-
-M.set_deadline = function(line, deadline)
-  local task = Task:from_line(nil, line)
-  assert(task, "Current line is not a task")
-  task:set_deadline(deadline)
-  return task:to_line()
-end
-
-M.set_status = function(line, status)
-  local task = Task:from_line(nil, line)
-  assert(task, "Current line is not a task")
-  task:set_status(status)
-  return task:to_line()
-end
-
-M.set_tags = function(line, tags)
-  local task = Task:from_line(nil, line)
-  assert(task, "Current line is not a task")
-  task:set_tags(tags)
-  return task:to_line()
-end
-
-
 return M
-
